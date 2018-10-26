@@ -15,31 +15,7 @@ mimeTypes = {
 };
 
 http.createServer((req, res) => {
-    //Control code.
-}).listen(8081);
-
-function collectRequestData(request, callback) {
-
-    const FORM_URLENCODED = 'application/x-www-form-urlencoded';
-    if (request.headers['content-type'] === FORM_URLENCODED) {
-        let body = '';
-        // Evento de acumulacion de data.
-        request.on('data', chunk => {
-            body += chunk.toString();
-        });
-        // Data completamente recibida
-        request.on('end', () => {
-            callback(null, parse(body));
-        });
-    } else {
-        callback({
-            msg: `The content-type don't is equals to ${FORM_URLENCODED}`
-        });
-    }
-
-}
-
-var pathname = url.parse(req.url).pathname;
+    var pathname = url.parse(req.url).pathname;
 
 if (pathname == "../index.html") {
     //Peticion de la pagina principal
@@ -146,3 +122,26 @@ if (req.method === 'POST' && pathname == "/cv") {
 
     });
 } 
+}).listen(8081);
+
+function collectRequestData(request, callback) {
+
+    const FORM_URLENCODED = 'application/x-www-form-urlencoded';
+    if (request.headers['content-type'] === FORM_URLENCODED) {
+        let body = '';
+        // Evento de acumulacion de data.
+        request.on('data', chunk => {
+            body += chunk.toString();
+        });
+        // Data completamente recibida
+        request.on('end', () => {
+            callback(null, parse(body));
+        });
+    } else {
+        callback({
+            msg: `The content-type don't is equals to ${FORM_URLENCODED}`
+        });
+    }
+
+}
+
